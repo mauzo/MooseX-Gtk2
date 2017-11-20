@@ -1,0 +1,8 @@
+*.c
+*.o
+Build
+_build
+blib
+log*
+otherblibs
+try*

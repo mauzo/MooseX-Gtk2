@@ -1,9 +1,36 @@
 package MooseX::Gtk2;
 
-use 5.010;
-use warnings;
-use strict;
+use Moose::Exporter;
+use MooseX::MethodAttributes        ();
+use MooseX::MethodAttributes::Role  ();
 
-our $VERSION = "0";
+use Moose::Util     qw/ensure_all_roles is_role/;
+
+BEGIN { *debug = $ENV{MOOSEX_GTK2_DEBUG} ? sub { warn "GTK2: ", @_ } : sub {} }
+
+my $Meta = "MooseX::Gtk2::Meta";
+
+Moose::Exporter->setup_import_methods(
+    class_metaroles => {
+        attribute       => ["$Meta\::Attribute"],
+        class           => ["$Meta\::Class"],
+    },
+#    role_metaroles => {
+#        attribute           => ["$Meta\::Attribute"],
+#        applied_attribute   => ["$Meta\::Attribute"],
+#    },
+);
+
+sub init_meta {
+    my (undef, %args) = @_;
+
+    ensure_all_roles $args{for_class}, "MooseX::Gtk2::Role";
+    if (is_role $args{for_class}) {
+        MooseX::MethodAttributes::Role->init_meta(%args);
+    }
+    else {
+        MooseX::MethodAttributes->init_meta(%args);
+    }
+}
 
 1;
