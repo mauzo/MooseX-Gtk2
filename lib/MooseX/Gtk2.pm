@@ -1,5 +1,7 @@
 package MooseX::Gtk2;
 
+use Carp        ();
+
 use Moose::Exporter;
 use MooseX::MethodAttributes        ();
 use MooseX::MethodAttributes::Role  ();
@@ -19,6 +21,7 @@ Moose::Exporter->setup_import_methods(
 #        attribute           => ["$Meta\::Attribute"],
 #        applied_attribute   => ["$Meta\::Attribute"],
 #    },
+    with_meta       => [qw/ gtk_default_target /],
 );
 
 sub init_meta {
@@ -31,6 +34,28 @@ sub init_meta {
     else {
         MooseX::MethodAttributes->init_meta(%args);
     }
+}
+
+sub gtk_default_target {
+    my ($meta, $type, $att) = @_;
+
+    # This should be $meta->DOES, but Moose seems to get confused about
+    # whether I'm asking for class roles or metaclass roles
+    Moose::Util::find_meta($meta)->does_role("$Meta\::Class")
+        or Carp::confess "Not a MooseX::Gtk2 class";
+
+    if ($type eq "signal") {
+        $meta->_gtk_default_signal_target($att);
+    }
+    elsif ($type eq "action") {
+        $meta->_gtk_default_action_target($att);
+    }
+    else {
+        Carp::croak "Bad Gtk target type '$type'";
+    }
+
+    my $nm = $meta->name;
+    debug "TARGET [$type] SET TO [$att] FOR [$nm]\n";
 }
 
 1;

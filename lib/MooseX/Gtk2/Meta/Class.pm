@@ -4,6 +4,15 @@ use Moose::Role;
 
 Moose::Util::meta_class_alias "Gtk2";
 
+has _gtk_default_signal_target => (
+    is      => "rw",
+    default => "",
+);
+has _gtk_default_action_target => (
+    is      => "rw",
+    default => "actions",
+);
+
 BEGIN { *debug = \&MooseX::Gtk2::debug }
 
 sub _gtk_signal_connect {
@@ -76,8 +85,10 @@ sub _gtk_extra_init {
     my ($self, $obj) = @_;
 
     debug "PROCESSING SIGNALS FOR [$obj]";
-    $self->_gtk_process_attribute($obj, "Signal", "");
-    $self->_gtk_process_attribute($obj, "Action", "actions", sub {
+    my $targ = $self->_gtk_default_signal_target;
+    $self->_gtk_process_attribute($obj, "Signal", $targ);
+    $targ = $self->_gtk_default_action_target;
+    $self->_gtk_process_attribute($obj, "Action", $targ, sub {
         my ($att, $name) = @_;
         my $act = $att->get_action($name);
         unless ($act) {
