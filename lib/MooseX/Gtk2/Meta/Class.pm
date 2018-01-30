@@ -43,12 +43,7 @@ sub _gtk_process_attribute {
         my $on = $obj->_resolve_object_path($att)
             or Carp::croak("Can't resolve '$att'");
 
-        unless ($name) {
-            $name = $method;
-            $name =~ s/^_//;
-            $name =~ s/_/-/g;
-        }
-        $map and ($on, $name) = $map->($on, $name);
+        $map and ($on, $name) = $map->($on, $name, $method);
         $on or next;
         $self->_gtk_signal_connect($on, $name, $obj, $method);
     }
@@ -86,10 +81,26 @@ sub _gtk_extra_init {
 
     debug "PROCESSING SIGNALS FOR [$obj]";
     my $targ = $self->_gtk_default_signal_target;
-    $self->_gtk_process_attribute($obj, "Signal", $targ);
+    $self->_gtk_process_attribute($obj, "Signal", $targ, sub {
+        my ($att, $name, $method) = @_;
+        unless ($name) {
+            $name = $method;
+            $name =~ s/^_//;
+            $name =~ s/_/-/g;
+        }
+        ($att, $name);
+    });
+
     $targ = $self->_gtk_default_action_target;
     $self->_gtk_process_attribute($obj, "Action", $targ, sub {
-        my ($att, $name) = @_;
+        my ($att, $name, $method) = @_;
+    
+        unless ($name) {
+            $name = $method;
+            $name =~ s/^_//;
+            $name = join "", map ucfirst, split /_/, $name;
+        }
+
         my $act = $att->get_action($name);
         unless ($act) {
             Carp::carp "Can't find action '$name' on '$att'";
