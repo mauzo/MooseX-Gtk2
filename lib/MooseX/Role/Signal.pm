@@ -14,6 +14,9 @@ has _signal_handlers => (
     default     => sub { +{} },
 );
 
+require MooseX::Gtk2;
+my $debug = \&MooseX::Gtk2::debug;
+
 sub signal_connect {
     my ($self, $sig, $cb) = @_;
 
@@ -43,10 +46,16 @@ sub signal_handler_disconnect {
 sub signal_emit {
     my ($self, $sig, @args) = @_;
 
-    my $hand = $self->_signal_handlers->{$sig}
+    $sig =~ s/_/-/g;
+
+    $debug->("EMIT SIGNAL [$sig] ON [$self] [@args]\n");
+
+    # Copy the list in case we connect or disconnect while invoking
+    # callbacks.
+    my @hand = @{ $self->_signal_handlers->{$sig} }
         or return;
 
-    $_->(@args) for @$hand;
+    $_->(@args) for @hand;
 }
 
 1;
