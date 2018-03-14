@@ -50,10 +50,11 @@ sub signal_emit {
 
     $debug->("EMIT SIGNAL [$sig] ON [$self] [@args]\n");
 
+    my $hand = $self->_signal_handlers->{$sig}
+        or return;
     # Copy the list in case we connect or disconnect while invoking
     # callbacks.
-    my @hand = @{ $self->_signal_handlers->{$sig} }
-        or return;
+    my @hand = @$hand;
 
     $_->(@args) for @hand;
 }
