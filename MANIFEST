@@ -1,0 +1,14 @@
+Build.PL
+Changes
+MANIFEST
+META.json
+META.yml
+lib/MooseX/Gtk2.pm
+lib/MooseX/Gtk2/Meta/Attribute.pm
+lib/MooseX/Gtk2/Meta/Class.pm
+lib/MooseX/Gtk2/Role.pm
+lib/MooseX/Role/NoGlobalDestruction.pm
+lib/MooseX/Role/ObjectPath.pm
+lib/MooseX/Role/Signal.pm
+lib/MooseX/Role/WeakClosure.pm
+t/00use.t

@@ -1,5 +1,16 @@
 package MooseX::Gtk2;
 
+=head1 NAME
+
+MooseX::Gtk2 - Moose extension to make Gtk2 more convenient
+
+=cut
+
+use 5.012;
+use warnings;
+
+our $VERSION = "1";
+
 use Carp        ();
 
 use Moose::Exporter;
@@ -59,3 +70,18 @@ sub gtk_default_target {
 }
 
 1;
+
+=head1 BUGS
+
+Please report bugs to <L<bug-MooseX-Gtk2@rt.cpan.org>>.
+
+=head1 AUTHOR
+
+Ben Morrow <ben@morrow.me.uk>.
+
+=head1 COPYRIGHT
+
+Copyright 2016 Ben Morrow <ben@morrow.me.uk>.
+
+Released under the 2-clause BSD licence.
+

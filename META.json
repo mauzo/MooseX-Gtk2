@@ -1,0 +1,68 @@
+{
+   "abstract" : "Moose extension to make Gtk2 more convenient",
+   "author" : [
+      "Ben Morrow <ben@morrow.me.uk>."
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4224",
+   "license" : [
+      "bsd"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "MooseX-Gtk2",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.96"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.38"
+         }
+      }
+   },
+   "provides" : {
+      "MooseX::Gtk2" : {
+         "file" : "lib/MooseX/Gtk2.pm",
+         "version" : "1"
+      },
+      "MooseX::Gtk2::Meta::Attribute" : {
+         "file" : "lib/MooseX/Gtk2/Meta/Attribute.pm"
+      },
+      "MooseX::Gtk2::Meta::Class" : {
+         "file" : "lib/MooseX/Gtk2/Meta/Class.pm"
+      },
+      "MooseX::Gtk2::Role" : {
+         "file" : "lib/MooseX/Gtk2/Role.pm"
+      },
+      "MooseX::Role::NoGlobalDestruction" : {
+         "file" : "lib/MooseX/Role/NoGlobalDestruction.pm"
+      },
+      "MooseX::Role::ObjectPath" : {
+         "file" : "lib/MooseX/Role/ObjectPath.pm"
+      },
+      "MooseX::Role::Signal" : {
+         "file" : "lib/MooseX/Role/Signal.pm"
+      },
+      "MooseX::Role::WeakClosure" : {
+         "file" : "lib/MooseX/Role/WeakClosure.pm"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Gtk2"
+      },
+      "license" : [
+         "http://opensource.org/licenses/bsd-license.php"
+      ],
+      "repository" : {
+         "url" : "http://github.com/mauzo/MooseX-Gtk2"
+      }
+   },
+   "version" : "1"
+}

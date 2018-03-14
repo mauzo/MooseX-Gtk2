@@ -1,0 +1,38 @@
+---
+abstract: 'Moose extension to make Gtk2 more convenient'
+author:
+  - 'Ben Morrow <ben@morrow.me.uk>.'
+build_requires:
+  Test::More: '0.96'
+configure_requires:
+  Module::Build: '0.38'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4224, CPAN::Meta::Converter version 2.150001'
+license: bsd
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: MooseX-Gtk2
+provides:
+  MooseX::Gtk2:
+    file: lib/MooseX/Gtk2.pm
+    version: '1'
+  MooseX::Gtk2::Meta::Attribute:
+    file: lib/MooseX/Gtk2/Meta/Attribute.pm
+  MooseX::Gtk2::Meta::Class:
+    file: lib/MooseX/Gtk2/Meta/Class.pm
+  MooseX::Gtk2::Role:
+    file: lib/MooseX/Gtk2/Role.pm
+  MooseX::Role::NoGlobalDestruction:
+    file: lib/MooseX/Role/NoGlobalDestruction.pm
+  MooseX::Role::ObjectPath:
+    file: lib/MooseX/Role/ObjectPath.pm
+  MooseX::Role::Signal:
+    file: lib/MooseX/Role/Signal.pm
+  MooseX::Role::WeakClosure:
+    file: lib/MooseX/Role/WeakClosure.pm
+resources:
+  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Gtk2
+  license: http://opensource.org/licenses/bsd-license.php
+  repository: http://github.com/mauzo/MooseX-Gtk2
+version: '1'
